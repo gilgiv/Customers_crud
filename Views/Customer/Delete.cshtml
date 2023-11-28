@@ -1,0 +1,59 @@
+﻿@model Customers_crud.Models.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Delete customer";
+    var errorMessage = TempData["ErrorMessage"]?.ToString();
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+
+<form action="Delete" method="post">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">ID number *</label>
+        <input type="number" class="form-control" asp-for="Tz" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Full name *</label>
+        <input type="text" class="form-control" asp-for="FullName" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-control" asp-for="Email" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Date of birth *</label>
+        <input type="date" class="form-control" asp-for="BirthDate" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Gender</label>
+        <input type="text" class="form-control" asp-for="Gender" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="number" class="form-control" asp-for="Phone" readonly />
+    </div>
+
+    <div class="d-grid">
+        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete customer: @Model.FullName ?')">Delete</button>
+    </div>
+</form>

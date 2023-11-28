@@ -1,0 +1,76 @@
+﻿@model List<Customers_crud.Models.CustomerViewModel>
+
+@{
+    ViewData["Title"] = "Customer Details";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["ErrorMessage"]?.ToString();
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success fade show">
+        <strong>Success! </strong> @successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong> @errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+<form>
+    <button asp-action="Create" asp-controller="Customer" class="btn btn-outline-primary mb-3">Create customer</button>
+    <table class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr class="table-active">
+                <th class="text-center">#</th>
+                <th>ID number</th>
+                <th>Full name</th>
+                <th>Email</th>
+                <th class="text-center">Date of birth</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td class="text-center">@customer.Id</td>
+                        <td>@customer.Tz</td>
+                        <td>@customer.FullName</td>
+                        <td>@customer.Email</td>
+                        <td class="text-center">@customer.BirthDate.ToString("dd/MM/yyyy")</td>
+                        <td>@customer.Gender</td>
+                        <td>@customer.Phone</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.Id" class="btn btn-primary">Edit</a>
+                                <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">
+                        <div>
+                            No customers available at this moment
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
