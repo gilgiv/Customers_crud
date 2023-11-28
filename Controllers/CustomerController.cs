@@ -199,7 +199,7 @@ namespace Customers_crud.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); 
             }
 
         }
